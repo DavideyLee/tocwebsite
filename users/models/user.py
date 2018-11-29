@@ -6,7 +6,7 @@ import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class User(AbstractUser):
+class MyUser(AbstractUser,PermissionsMixin):
     ROLE_ADMIN = 'Admin'
     ROLE_USER = 'User'
 
