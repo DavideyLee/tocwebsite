@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block content %}
+    <title>{% block title %}TOC管理后台主页{% endblock %}</title>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">Users</span>
+                        <h5>{% trans 'Total users' %}</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><a href="#">{{ users_count }}</a></h1>
+                        <small>All users</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">Hosts</span>
+                        <h5>{% trans 'Total hosts' %}</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><a href="#">{{ assets_count }}</a></h1>
+                        <small>All hosts</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Online</span>
+                        <h5>{% trans 'Online users' %}</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><a href="#"> <span id="online_users"></span>{{ online_user_count }}</a></h1>
+                        <small>Online users</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-danger pull-right">Connected</span>
+                        <h5>{% trans 'Online sessions' %}</h5>
+
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins"><a href="#"> <span id="online_hosts"></span>{{ online_asset_count }}</a></h1>
+                        <small>Online sessions</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

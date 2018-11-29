@@ -1,0 +1,40 @@
+{% load i18n %}
+<li class="active" id="index">
+{#    <a href="{% url 'index' %}">#}
+    <a href="{% url 'index' %}">
+        <i class="fa fa-dashboard" style="width: 14px"></i> <span class="nav-label">{% trans '仪表盘' %}</span>
+        <span class="label label-info pull-right"></span>
+    </a>
+</li>
+
+<li id="users">
+    <a href="#">
+        <i class="fa fa-group" style="width: 14px"></i> <span class="nav-label">{% trans '用户管理' %}</span><span class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level active">
+{#        <li id="user"><a href="{% url 'users:user-list' %}">{% trans 'User list' %}</a></li>#}
+{#        <li id="user-group"><a href="{% url 'users:user-group-list' %}">{% trans 'User group' %}</a></li>#}
+        <li id="user"><a href="#">{% trans '用户列表' %}</a></li>
+        <li id="user-group"><a href="#">{% trans '用户组' %}</a></li>
+    </ul>
+</li>
+
+<li id="event">
+    <a href="#">
+        <i class="fa fa-cc" style="width: 14px"></i> <span class="nav-label">{% trans '事件管理' %}</span><span class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level active">
+        <li id="event-setting"><a href="#">{% trans '事件配置' %}</a></li>
+        <li id="event-record"><a href="#">{% trans '事件记录' %}</a></li>
+    </ul>
+</li>
+
+<li id="setting">
+    <a href="#">
+        <i class="fa fa-gears" style="width: 14px"></i> <span class="nav-label">{% trans '系统配置' %}</span><span class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level active">
+        <li id="setting-api"><a href="#">{% trans '接口配置' %}</a></li>
+        <li id="setting-ldap"><a href="#">{% trans 'LDAP配置' %}</a></li>
+    </ul>
+</li>
