@@ -28,4 +28,4 @@ urlpatterns = [
 
 #  静态资源（css、js）加载URL设置、头像URL加载设置
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
-            + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
+            + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
