@@ -108,7 +108,7 @@ EMAIL_FROM = '312119022@qq.com'  # 你的 QQ 账号
 # 邮件注册有效期天数
 CONFIRM_DAYS = 7
 # 自定义用户模型
-AUTH_USER_MODEL = "users.MyUser"
+AUTH_USER_MODEL = 'users.MyUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
