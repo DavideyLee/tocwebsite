@@ -158,3 +158,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'static/'
+# 表示登录后跳转到index页面
+LOGOUT_REDIRECT_URL = '/users/login/'
+LOGIN_REDIRECT_URL = 'index'

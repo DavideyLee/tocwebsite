@@ -18,8 +18,8 @@ from users import views
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^users/', include('users.urls')),
-    url(r'^users/', include('django.contrib.auth.urls')),
-    url(r'^$', views.index, name='index'),
+    url(r'^admin/', admin.site.urls),    # 设置超级管理员的路由
+    url(r'^users/', include('users.urls')),  # 设置自定义users的路由
+    url(r'^users/', include('django.contrib.auth.urls')), # 设置内置的URL路由
+    url(r'^$', views.index, name='index'), # 设置自定义首页index页面URL的路由
 ]
