@@ -5,7 +5,7 @@ import uuid
 from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
+from django.conf import settings
 
 __all__ = ['MyUser']
 
@@ -64,6 +64,30 @@ class MyUser(AbstractUser):
         max_length=30, default=SOURCE_LOCAL, choices=SOURCE_CHOICES,
         verbose_name=_('Source')
     )
+
+    @property
+    def is_superuser(self):
+        if self.role == 'Admin':
+            return True
+        else:
+            return False
+
+    @is_superuser.setter
+    def is_superuser(self, value):
+        if value is True:
+            self.role = 'Admin'
+        else:
+            self.role = 'User'
+
+    def avatar_url(self):
+        admin_default = settings.MEDIA_URL + "avatar/admin.png"
+        user_default = settings.STATIC_URL + "avatar/user.png"
+        if self.avatar:
+            return self.avatar.url
+        if self.is_superuser:
+            return admin_default
+        else:
+            return user_default
 
     def __str__(self):
         return '{0.username}'.format(self)
