@@ -12,12 +12,10 @@ __all__ = ['MyUser']
 class MyUser(AbstractUser):
     ROLE_ADMIN = 'Admin'
     ROLE_USER = 'User'
-    ROLE_APP = 'App'
 
     ROLE_CHOICES = (
-        (ROLE_ADMIN, _('Administrator')),
-        (ROLE_USER, _('User')),
-        (ROLE_APP, _('Application'))
+        (ROLE_ADMIN, _('管理员')),
+        (ROLE_USER, _('普通用户')),
     )
     SOURCE_LOCAL = 'local'
     SOURCE_LDAP = 'ldap'
@@ -60,7 +58,7 @@ class MyUser(AbstractUser):
     )
     is_first_login = models.BooleanField(default=True)
     created_by = models.CharField(
-        max_length=30, default='', verbose_name=_('Created by')
+        max_length=30, blank=True, verbose_name=_('Created by')
     )
     source = models.CharField(
         max_length=30, default=SOURCE_LOCAL, choices=SOURCE_CHOICES,
@@ -68,7 +66,7 @@ class MyUser(AbstractUser):
     )
 
     def __str__(self):
-        return '{0.name}({0.username})'.format(self)
+        return '{0.username}'.format(self)
 
     class Meta:
         ordering = ['username']
