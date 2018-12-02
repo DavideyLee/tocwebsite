@@ -31,6 +31,7 @@ class MyUser(AbstractUser):
     username = models.CharField(
         max_length=128, unique=True, verbose_name=_('Username')
     )
+    name = models.CharField(max_length=128, null=True, verbose_name=_('Name'))
     usernumber = models.CharField(
         max_length=20, blank=True, null=True, verbose_name=_('User number')
     )
