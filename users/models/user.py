@@ -114,3 +114,4 @@ class MyUser(AbstractUser):
     @property
     def is_app(self):
         return self.role == 'App'
+

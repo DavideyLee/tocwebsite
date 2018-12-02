@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',  # 注册自定义的应用users
     'orgs',
     'common',
+    'rest_framework',  # 配置 rest_framework app
 ]
 
 MIDDLEWARE = [
