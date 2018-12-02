@@ -80,7 +80,7 @@ class MyUser(AbstractUser):
             self.role = 'User'
 
     def avatar_url(self):
-        admin_default = settings.MEDIA_URL + "avatar/admin.png"
+        admin_default = settings.MEDIA_URL + "avatar/root.png"
         user_default = settings.STATIC_URL + "avatar/user.png"
         if self.avatar:
             return self.avatar.url

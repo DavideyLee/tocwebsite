@@ -164,3 +164,8 @@ MEDIA_ROOT = 'media/'
 # 表示登录后跳转到index页面
 LOGOUT_REDIRECT_URL = '/users/login/'
 LOGIN_REDIRECT_URL = 'index'
+
+# session 设置
+SESSION_COOKIE_AGE = 60 * 30  # 30分钟
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True # 关闭浏览器，则COOKIE失效
