@@ -1,6 +1,19 @@
 import copy
+import re
 
+UUID_PATTERN = re.compile(r'[0-9a-zA-Z\-]{36}')
 
+def is_uuid(seq):
+    if isinstance(seq, str):
+        if UUID_PATTERN.match(seq):
+            return True
+        else:
+            return False
+    else:
+        for s in seq:
+            if not is_uuid(s):
+                return False
+        return True
 
 class LocalProxy(object):
 

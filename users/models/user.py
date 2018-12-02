@@ -12,10 +12,12 @@ __all__ = ['MyUser']
 class MyUser(AbstractUser):
     ROLE_ADMIN = 'Admin'
     ROLE_USER = 'User'
+    ROLE_APP = 'App'
 
     ROLE_CHOICES = (
         (ROLE_ADMIN, _('管理员')),
         (ROLE_USER, _('普通用户')),
+        (ROLE_APP, _('应用程序'))
     )
     SOURCE_LOCAL = 'local'
     SOURCE_LDAP = 'ldap'
@@ -95,3 +97,19 @@ class MyUser(AbstractUser):
     class Meta:
         ordering = ['username']
         verbose_name = _("User")
+
+    @property
+    def admin_orgs(self):
+        from orgs.models import Organization
+        return Organization.get_user_admin_orgs(self)
+
+    @property
+    def is_org_admin(self):
+        if self.is_superuser or self.admin_orgs.exists():
+            return True
+        else:
+            return False
+
+    @property
+    def is_app(self):
+        return self.role == 'App'

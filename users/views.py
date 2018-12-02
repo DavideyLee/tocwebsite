@@ -57,17 +57,4 @@ class UserListView(AdminUserRequiredMixin, TemplateView):
         })
         return context
 
-def user_list(request):
-    if request.method == "POST":
-        u = request.POST.get("username", None)
-        r = request.POST.get("role", None)
-        e = request.POST.get("email", None)
-        MyUser.objects.create(
-            username=u,
-            role=r,
-            email=e,
-        )
-    user_list = MyUser.objects.all()
-    return render(request, "users/user_list.html", {"user_list": user_list})
-
 

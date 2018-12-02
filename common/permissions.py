@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import redirect
 from django.http.response import HttpResponseForbidden
-
+from orgs.utils import current_org
 
 class AdminUserRequiredMixin(UserPassesTestMixin):
     def test_func(self):

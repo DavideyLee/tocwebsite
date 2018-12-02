@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',  # 注册自定义的应用users
+    'orgs',
+    'common',
 ]
 
 MIDDLEWARE = [
