@@ -3,6 +3,7 @@ from .forms import RegisterForm
 from .models import MyUser
 from django.views.generic.base import TemplateView
 from common.permissions import AdminUserRequiredMixin
+from django.utils.translation import ugettext as _
 
 # Create your views here.
 
@@ -53,7 +54,7 @@ class UserListView(AdminUserRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context.update({
             'app': _('Users'),
-            'action': _('User list'),
+            'action': _('用户列表'),
         })
         return context
 

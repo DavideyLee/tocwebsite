@@ -99,19 +99,19 @@ class MyUser(AbstractUser):
         ordering = ['username']
         verbose_name = _("User")
 
-    @property
-    def admin_orgs(self):
-        from orgs.models import Organization
-        return Organization.get_user_admin_orgs(self)
-
-    @property
-    def is_org_admin(self):
-        if self.is_superuser or self.admin_orgs.exists():
-            return True
-        else:
-            return False
-
-    @property
-    def is_app(self):
-        return self.role == 'App'
+    # @property
+    # def admin_orgs(self):
+    #     from orgs.models import Organization
+    #     return Organization.get_user_admin_orgs(self)
+    #
+    # @property
+    # def is_org_admin(self):
+    #     if self.is_superuser or self.admin_orgs.exists():
+    #         return True
+    #     else:
+    #         return False
+    #
+    # @property
+    # def is_app(self):
+    #     return self.role == 'App'
 
