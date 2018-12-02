@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from .models import MyUser
+from django.views.generic.base import TemplateView
+from common.permissions import AdminUserRequiredMixin
 
 # Create your views here.
 
@@ -42,5 +44,30 @@ def index(request):
     else:
         return render(request, 'index.html')
 
+
+
+class UserListView(AdminUserRequiredMixin, TemplateView):
+    template_name = 'users/user_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'app': _('Users'),
+            'action': _('User list'),
+        })
+        return context
+
+def user_list(request):
+    if request.method == "POST":
+        u = request.POST.get("username", None)
+        r = request.POST.get("role", None)
+        e = request.POST.get("email", None)
+        MyUser.objects.create(
+            username=u,
+            role=r,
+            email=e,
+        )
+    user_list = MyUser.objects.all()
+    return render(request, "users/user_list.html", {"user_list": user_list})
 
 
