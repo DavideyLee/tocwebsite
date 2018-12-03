@@ -17,7 +17,7 @@ class MyUser(AbstractUser):
     ROLE_CHOICES = (
         (ROLE_ADMIN, _('管理员')),
         (ROLE_USER, _('普通用户')),
-        (ROLE_APP, _('应用程序'))
+        (ROLE_APP, _('应用程序')),
     )
     SOURCE_LOCAL = 'local'
     SOURCE_LDAP = 'ldap'

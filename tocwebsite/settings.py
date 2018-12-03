@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'orgs',
     'common',
     'rest_framework',  # 配置 rest_framework app
+    'event',
 ]
 
 MIDDLEWARE = [
