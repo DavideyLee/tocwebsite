@@ -47,15 +47,17 @@ def index(request):
 
 
 
-class UserListView(AdminUserRequiredMixin, TemplateView):
+class UserListView(TemplateView):
     template_name = 'users/user_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({
-            'app': _('Users'),
-            'action': _('用户列表'),
-        })
+        context['latest_myuers'] = MyUser.objects.all()[:5]
+        # context.update({
+        #     'app': _('Users'),
+        #     'action': _('用户列表'),
+        # })
+        print(context)
         return context
 
 
