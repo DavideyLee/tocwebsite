@@ -19,6 +19,13 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.urls import path
+from django.views.i18n import JavaScriptCatalog
+from django.conf.urls.i18n import i18n_patterns
+from .views import *
+
+js_i18n_patterns = i18n_patterns(
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),    # 设置超级管理员的路由

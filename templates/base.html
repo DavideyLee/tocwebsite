@@ -4,8 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>Jumpserver</title>
+    <link rel="shortcut icon" href="{% static 'img/facio.ico' %}" type="image/x-icon">
     {% include '_head_css_js.html' %}
+    <link href="{% static 'css/jumpserver.css' %}" rel="stylesheet">
+    {% block custom_head_css_js %} {% endblock %}
 </head>
 <body>
 <div id="wrapper">
@@ -43,7 +47,7 @@
         </div>
     </nav>
     {# 头部导航栏内容全放到这里！#}
-    <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
