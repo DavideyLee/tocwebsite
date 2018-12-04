@@ -10,7 +10,7 @@ urlpatterns = [
     # Login view
 
     # User view
-    path('user/', views.UserListView.as_view(), name='user-list'),
+    path('user/', views.UserListView.as_view(), name='user_list'),
     url(r'^register/', views.register, name='register'),
 
 ]

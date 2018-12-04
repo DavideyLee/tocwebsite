@@ -1,8 +1,9 @@
+{% load static i18n %}
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
-            {% include '_user_profile.html' %}
-            {% if request.user.is_org_admin and request.COOKIES.IN_ADMIN_PAGE != "No" %}
+            {% include '_head_bar.html' %}
+            {% if user.role == "Admin" %}
                 {% include '_nav.html' %}
             {% else %}
                 {% include '_nav_user.html' %}

@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm
 from .models import MyUser
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 from common.permissions import AdminUserRequiredMixin
 from django.utils.translation import ugettext as _
+from orgs.utils import current_org
+from .models import UserGroup
 
 # Create your views here.
 
@@ -52,12 +55,34 @@ class UserListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['latest_myuers'] = MyUser.objects.all()[:5]
-        # context.update({
-        #     'app': _('Users'),
-        #     'action': _('用户列表'),
-        # })
+        context['latest_myuers'] = MyUser.objects.all()
+        context.update({
+            'app': _('Users'),
+            'action': _('用户列表'),
+        })
         print(context)
         return context
 
+class UserDetailView(AdminUserRequiredMixin, DetailView):
+    model = MyUser
+    template_name = 'users/user_detail.html'
+    context_object_name = "user_object"
+    key_prefix_block = "_LOGIN_BLOCK_{}"
 
+    def get_context_data(self, **kwargs):
+        user = self.get_object()
+        key_block = self.key_prefix_block.format(user.username)
+        groups = UserGroup.objects.exclude(id__in=self.object.groups.all())
+        context = {
+            'app': _('Users'),
+            'action': _('User detail'),
+            'groups': groups,
+        }
+        kwargs.update(context)
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        org_users = current_org.get_org_users().values_list('id', flat=True)
+        queryset = queryset.filter(id__in=org_users)
+        return queryset

@@ -1,6 +1,5 @@
-{% load i18n %}
-<li class="active" id="index">
-{#    <a href="{% url 'index' %}">#}
+{% load static i18n %}
+<li id="index">
     <a href="{% url 'index' %}">
         <i class="fa fa-dashboard" style="width: 14px"></i> <span class="nav-label">{% trans '仪表盘' %}</span>
         <span class="label label-info pull-right"></span>
@@ -12,9 +11,7 @@
         <i class="fa fa-group" style="width: 14px"></i> <span class="nav-label">{% trans '用户管理' %}</span><span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level active">
-{#        <li id="user"><a href="{% url 'users:user-list' %}">{% trans 'User list' %}</a></li>#}
-{#        <li id="user-group"><a href="{% url 'users:user-group-list' %}">{% trans 'User group' %}</a></li>#}
-        <li id="user"><a href="{% url 'users:user-list' %}">{% trans '用户列表' %}</a></li>
+        <li id="user-list"><a href="{% url 'users:user_list' %}">{% trans '用户列表' %}</a></li>
         <li id="user-group"><a href="#">{% trans '用户组' %}</a></li>
     </ul>
 </li>

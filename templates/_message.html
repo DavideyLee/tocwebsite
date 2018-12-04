@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load static i18n %}
 {% block first_login_message %}
     {% if request.user.is_authenticated and request.user.is_first_login %}
     <div class="alert alert-danger help-message alert-dismissable">

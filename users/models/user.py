@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from collections import OrderedDict
 
 __all__ = ['MyUser']
 
@@ -115,3 +116,18 @@ class MyUser(AbstractUser):
     # def is_app(self):
     #     return self.role == 'App'
 
+    def to_json(self):
+        return OrderedDict({
+            'id': self.id,
+            'username': self.username,
+            'name': self.name,
+            'email': self.email,
+            'is_active': self.is_active,
+            'is_superuser': self.is_superuser,
+            'role': self.get_role_display(),
+            'groups': [group.name for group in self.groups.all()],
+            'source': self.get_source_display(),
+            'wechat': self.wechat,
+            'phone': self.phone,
+            'comment': self.comment,
+        })
