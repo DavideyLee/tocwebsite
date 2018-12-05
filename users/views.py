@@ -3,10 +3,13 @@ from .forms import RegisterForm
 from .models import MyUser
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from common.permissions import AdminUserRequiredMixin
 from django.utils.translation import ugettext as _
 from orgs.utils import current_org
 from .models import UserGroup
+from django.http.response import JsonResponse
+from django.core import serializers
 
 # Create your views here.
 
@@ -50,18 +53,34 @@ def index(request):
 
 
 
-class UserListView(TemplateView):
+# class UserListView(TemplateView):
+#     template_name = 'users/user_list.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['latest_myuers'] = MyUser.objects.all()
+#         context.update({
+#             'app': _('Users'),
+#             'action': _('用户列表'),
+#         })
+#         print(context)
+#         return context
+
+class UserListView(ListView):
+    model = MyUser
     template_name = 'users/user_list.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['latest_myuers'] = MyUser.objects.all()
         context.update({
             'app': _('Users'),
             'action': _('用户列表'),
         })
+        # print(MyUser.to_json(self))
         print(context)
         return context
+
 
 class UserDetailView(AdminUserRequiredMixin, DetailView):
     model = MyUser
