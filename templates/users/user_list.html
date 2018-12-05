@@ -30,7 +30,9 @@
                 <td class="text-center"> {{ user.role }} </td>
                 <td class="text-center"> {{ user.email }}</td>
                 <th class="text-center">{{ user.source }}</th>
-                <td class="text-center">{{ user.is_active }}</td>
+                <td class="text-center">{{ user.is_active }}
+
+                </td>
                 <td class="text-center">
                     <a href="#" class="btn btn-xs btn-danger">删除</a>
                     <a href="#" class="btn btn-xs btn-info">更新</a>
@@ -41,38 +43,36 @@
         {% endfor %}
         </tbody>
     </table>
-{#    <div id="actions" class="hide">#}
-{#        <div class="input-group">#}
-{#            <select class="form-control m-b" style="width: auto" id="slct_bulk_update">#}
-{#                <option value="delete">{% trans '批量删除' %}</option>#}
-{#                <option value="update">{% trans '批量更新' %}</option>#}
-{#                <option value="deactive">{% trans '禁用所选' %}</option>#}
-{#                <option value="active">{% trans '激活所选' %}</option>#}
-{#            </select>#}
-{#            <div class="input-group-btn pull-left" style="padding-left: 5px;">#}
-{#                <button id='btn_bulk_update' style="height: 32px;"  class="btn btn-sm btn-primary">#}
-{#                    {% trans '提交' %}#}
-{#                </button>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+    {#    <div id="actions" class="hide">#}
+    {#        <div class="input-group">#}
+    {#            <select class="form-control m-b" style="width: auto" id="slct_bulk_update">#}
+    {#                <option value="delete">{% trans '批量删除' %}</option>#}
+    {#                <option value="update">{% trans '批量更新' %}</option>#}
+    {#                <option value="deactive">{% trans '禁用所选' %}</option>#}
+    {#                <option value="active">{% trans '激活所选' %}</option>#}
+    {#            </select>#}
+    {#            <div class="input-group-btn pull-left" style="padding-left: 5px;">#}
+    {#                <button id='btn_bulk_update' style="height: 32px;"  class="btn btn-sm btn-primary">#}
+    {#                    {% trans '提交' %}#}
+    {#                </button>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
 {% endblock %}
 {% block content_bottom_left %}{% endblock %}
 {% block custom_foot_js %}
-{#    <script src="{% static 'js/jquery.form.min.js' %}"></script>#}
-     <script src="{% static 'js/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.min.js' %}"></script>
+    <script src="{% static 'js/plugins/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'js/plugins/datatables/dataTables.bootstrap.min.js' %}"></script>
-{#    <script src="{% static 'js/term.js' %}"></script>#}
-{#    <script src="{% static 'js/ironssh.js' %}"></script>#}
     <script>
         $(function () {
             $('#user_list_table').DataTable({
-              "paging": true,       <!-- 允许分页 -->
-              "lengthChange": true, <!-- 允许改变每页显示的行数 -->
-              "searching": true,    <!-- 允许内容搜索 -->
-              "ordering": true,     <!-- 允许排序 -->
-              "info": true,         <!-- 显示信息 -->
-              "autoWidth": true
+                "paging": true,       <!-- 允许分页 -->
+                "lengthChange": true, <!-- 允许改变每页显示的行数 -->
+                "searching": true,    <!-- 允许内容搜索 -->
+                "ordering": true,     <!-- 允许排序 -->
+                "info": true,         <!-- 显示信息 -->
+                "autoWidth": true
             });
         });
     </script>
