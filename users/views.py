@@ -66,7 +66,7 @@ def index(request):
 #         print(context)
 #         return context
 
-class UserListView(ListView):
+class UserListView(AdminUserRequiredMixin,TemplateView):
     model = MyUser
     template_name = 'users/user_list.html'
 
