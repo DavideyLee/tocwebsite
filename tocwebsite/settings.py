@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'common',
     'rest_framework',  # 配置 rest_framework app
     'event',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -173,3 +174,14 @@ LOGIN_REDIRECT_URL = 'index'
 SESSION_COOKIE_AGE = 60 * 30  # 30分钟
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True # 关闭浏览器，则COOKIE失效
+
+
+BOOTSTRAP3 = {
+    'horizontal_label_class': 'col-md-2',
+    # Field class to use in horizontal forms
+    'horizontal_field_class': 'col-md-9',
+    # Set placeholder attributes to label if no placeholder is provided
+    'set_placeholder': True,
+    'success_css_class': '',
+}
+DEFAULT_EXPIRED_YEARS = 70

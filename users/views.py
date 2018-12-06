@@ -8,9 +8,14 @@ from common.permissions import AdminUserRequiredMixin
 from django.utils.translation import ugettext as _
 from orgs.utils import current_org
 from .models import UserGroup
+from django.urls import reverse_lazy, reverse
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, TemplateView
+from common.const import create_success_msg, update_success_msg
 from django.http.response import JsonResponse
 from django.core import serializers
-
+from .signals import post_user_create
+from . import forms
 # Create your views here.
 
 def register(request):
@@ -52,6 +57,30 @@ def index(request):
         return render(request, 'index.html')
 
 
+class UserCreateView(AdminUserRequiredMixin, SuccessMessageMixin, CreateView):
+    model = MyUser
+    form_class = forms.UserCreateUpdateForm
+    template_name = 'users/user_create.html'
+    success_url = reverse_lazy('users:user_list')
+    success_message = create_success_msg
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({'app': _('Users'), 'action': _('Create user')})
+        return context
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.created_by = self.request.user.username or 'System'
+        user.save()
+        post_user_create.send(self.__class__, user=user)
+        return super().form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(UserCreateView, self).get_form_kwargs()
+        data = {'request': self.request}
+        kwargs.update(data)
+        return kwargs
 
 # class UserListView(TemplateView):
 #     template_name = 'users/user_list.html'

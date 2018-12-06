@@ -4,6 +4,7 @@ import logging
 from itsdangerous import TimedJSONWebSignatureSerializer, JSONWebSignatureSerializer, \
     BadSignature, SignatureExpired
 from django.conf import settings
+from django.utils import timezone
 
 UUID_PATTERN = re.compile(r'[0-9a-zA-Z\-]{36}')
 
@@ -185,3 +186,10 @@ class LocalProxy(object):
     __rdivmod__ = lambda x, o: x._get_current_object().__rdivmod__(o)
     __copy__ = lambda x: copy.copy(x._get_current_object())
     __deepcopy__ = lambda x, memo: copy.deepcopy(x._get_current_object(), memo)
+
+def date_expired_default():
+    try:
+        years = int(settings.DEFAULT_EXPIRED_YEARS)
+    except TypeError:
+        years = 70
+    return timezone.now() + timezone.timedelta(days=365*years)

@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from collections import OrderedDict
+from common.utils import get_signer, date_expired_default
 
 __all__ = ['MyUser']
 
@@ -14,7 +15,11 @@ class MyUser(AbstractUser):
     ROLE_ADMIN = 'Admin'
     ROLE_USER = 'User'
     ROLE_APP = 'App'
-
+    OTP_LEVEL_CHOICES = (
+        (0, _('Disable')),
+        (1, _('Enable')),
+        (2, _("Force enable")),
+    )
     ROLE_CHOICES = (
         (ROLE_ADMIN, _('管理员')),
         (ROLE_USER, _('普通用户')),
@@ -56,13 +61,19 @@ class MyUser(AbstractUser):
     phone = models.CharField(
         max_length=20, blank=True, null=True, verbose_name=_('Phone')
     )
-
+    otp_level = models.SmallIntegerField(
+        default=0, choices=OTP_LEVEL_CHOICES, verbose_name=_('MFA')
+    )
     comment = models.TextField(
         max_length=200, blank=True, verbose_name=_('Comment')
     )
     is_first_login = models.BooleanField(default=True)
     created_by = models.CharField(
         max_length=30, blank=True, verbose_name=_('Created by')
+    )
+    date_expired = models.DateTimeField(
+        default=date_expired_default, blank=True, null=True,
+        db_index=True, verbose_name=_('Date expired')
     )
     source = models.CharField(
         max_length=30, default=SOURCE_LOCAL, choices=SOURCE_CHOICES,

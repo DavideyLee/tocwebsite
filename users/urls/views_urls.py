@@ -11,6 +11,7 @@ urlpatterns = [
 
     # User view
     path('user/', views.UserListView.as_view(), name='user_list'),
+    path('user/', views.UserCreateView.as_view(), name='user-create'),
     url(r'^register/', views.register, name='register'),
 
 ]
