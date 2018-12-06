@@ -154,6 +154,11 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 
+
+# I18N translation
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -185,3 +190,27 @@ BOOTSTRAP3 = {
     'success_css_class': '',
 }
 DEFAULT_EXPIRED_YEARS = 70
+
+XPACK_DIR = os.path.join(BASE_DIR, 'xpack')
+XPACK_ENABLED = os.path.isdir(XPACK_DIR)
+if XPACK_ENABLED:
+    INSTALLED_APPS.append('xpack.apps.XpackConfig')
+
+
+    def get_xpack_context_processor():
+        if XPACK_ENABLED:
+            return ['xpack.context_processor.xpack_processor']
+        return []
+
+
+    def get_xpack_templates_dir():
+        if XPACK_ENABLED:
+            dirs = []
+            from xpack.utils import find_enabled_plugins
+            for i in find_enabled_plugins():
+                template_dir = os.path.join(BASE_DIR, 'xpack', 'plugins', i, 'templates')
+                if os.path.isdir(template_dir):
+                    dirs.append(template_dir)
+            return dirs
+        else:
+            return []

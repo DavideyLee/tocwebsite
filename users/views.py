@@ -66,7 +66,7 @@ class UserCreateView(AdminUserRequiredMixin, SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update({'app': _('Users'), 'action': _('Create user')})
+        context.update({'app': _('Users'), 'action': _('创建用户')})
         return context
 
     def form_valid(self, form):
@@ -103,7 +103,7 @@ class UserListView(AdminUserRequiredMixin,TemplateView):
         context = super().get_context_data(**kwargs)
         context['latest_myuers'] = MyUser.objects.all()
         context.update({
-            'app': _('Users'),
+            'app': _('用户管理'),
             'action': _('用户列表'),
         })
         # print(MyUser.to_json(self))

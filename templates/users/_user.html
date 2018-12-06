@@ -10,7 +10,7 @@
     {% endif %}
     <form method="post" class="form-horizontal" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        <h3>{% trans 'Account' %}</h3>
+        <h3>{% trans '账户' %}</h3>
         {% bootstrap_field form.name layout="horizontal" %}
         {% bootstrap_field form.username layout="horizontal" %}
         {% bootstrap_field form.email layout="horizontal" %}
@@ -18,12 +18,12 @@
 
         <div class="hr-line-dashed"></div>
 
-        <h3>{% trans 'Auth' %}</h3>
+        <h3>{% trans '认证' %}</h3>
         {% block password %}{% endblock %}
         {% bootstrap_field form.otp_level layout="horizontal" %}
 
         <div class="hr-line-dashed"></div>
-        <h3>{% trans 'Security and Role' %}</h3>
+        <h3>{% trans '角色安全' %}</h3>
         {% bootstrap_field form.role layout="horizontal" %}
         <div class="form-group {% if form.date_expired.errors %} has-error {% endif %}" id="date_5">
             <label for="{{ form.date_expired.id_for_label }}" class="col-sm-2 control-label">{{ form.date_expired.label }}</label>
@@ -36,15 +36,15 @@
             </div>
          </div>
         <div class="hr-line-dashed"></div>
-        <h3>{% trans 'Profile' %}</h3>
+        <h3>{% trans '个人信息' %}</h3>
         {% bootstrap_field form.phone layout="horizontal" %}
         {% bootstrap_field form.wechat layout="horizontal" %}
         {% bootstrap_field form.comment layout="horizontal" %}
         <div class="hr-line-dashed"></div>
         <div class="form-group">
             <div class="col-sm-4 col-sm-offset-2">
-                <button class="btn btn-white" type="reset">{% trans 'Reset' %}</button>
-                <button id="submit_button" class="btn btn-primary" type="submit">{% trans 'Submit' %}</button>
+                <button class="btn btn-white" type="reset">{% trans '重置' %}</button>
+                <button id="submit_button" class="btn btn-primary" type="submit">{% trans '提交' %}</button>
             </div>
         </div>
     </form>

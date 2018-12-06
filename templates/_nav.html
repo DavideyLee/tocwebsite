@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load i18n %}
 <li id="index">
     <a href="{% url 'index' %}">
         <i class="fa fa-dashboard" style="width: 14px"></i> <span class="nav-label">{% trans '仪表盘' %}</span>
@@ -26,6 +26,7 @@
     </ul>
 </li>
 
+
 <li id="setting">
     <a href="#">
         <i class="fa fa-gears" style="width: 14px"></i> <span class="nav-label">{% trans '系统配置' %}</span><span class="fa arrow"></span>
@@ -33,5 +34,32 @@
     <ul class="nav nav-second-level active">
         <li id="setting-api"><a href="#">{% trans '接口配置' %}</a></li>
         <li id="setting-ldap"><a href="#">{% trans 'LDAP配置' %}</a></li>
+{% if XPACK_PLUGINS %}
+<li id="xpack">
+    <a>
+        <i class="fa fa-sitemap" style="width: 14px"></i> <span class="nav-label">{% trans 'XPack' %}</span><span class="fa arrow"></span>
+    </a>
+    <ul class="nav nav-second-level">
+        {% for plugin in XPACK_PLUGINS %}
+            {% ifequal plugin.name 'cloud'%}
+                <li id="{{ plugin.name }}">
+                    <a href="#"><span class="nav-label">{% trans plugin.verbose_name %}</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-third-level">
+                        <li id="account"><a href="{% url 'xpack:cloud:account-list' %}">{% trans 'Account list' %}</a></li>
+                        <li id="sync-instance-task"><a href="{% url 'xpack:cloud:sync-instance-task-list' %}">{% trans 'Sync instance' %}</a></li>
+                    </ul>
+                </li>
+            {% else %}
+                <li id="{{ plugin.name }}"><a href="{{ plugin.endpoint }}">{% trans plugin.verbose_name %}</a></li>
+            {% endifequal %}
+        {% endfor %}
     </ul>
 </li>
+{% endif %}
+
+<script>
+$(document).ready(function () {
+    var current_org = '{{ CURRENT_ORG.name }}';
+    console.log(current_org);
+})
+</script>

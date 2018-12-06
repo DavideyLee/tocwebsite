@@ -16,9 +16,9 @@ class MyUser(AbstractUser):
     ROLE_USER = 'User'
     ROLE_APP = 'App'
     OTP_LEVEL_CHOICES = (
-        (0, _('Disable')),
-        (1, _('Enable')),
-        (2, _("Force enable")),
+        (0, _('禁用')),
+        (1, _('启用')),
+        (2, _("强制启用")),
     )
     ROLE_CHOICES = (
         (ROLE_ADMIN, _('管理员')),
@@ -37,7 +37,7 @@ class MyUser(AbstractUser):
     username = models.CharField(
         max_length=128, unique=True, verbose_name=_('Username')
     )
-    name = models.CharField(max_length=128, null=True, verbose_name=_('Name'))
+    name = models.CharField(max_length=128, null=True, verbose_name=_('姓名'))
     usernumber = models.CharField(
         max_length=20, blank=True, null=True, verbose_name=_('User number')
     )
@@ -46,26 +46,26 @@ class MyUser(AbstractUser):
     )
     groups = models.ManyToManyField(
         Group, related_name='users',
-        blank=True, verbose_name=_('User group')
+        blank=True, verbose_name=_('用户组')
     )
     role = models.CharField(
         choices=ROLE_CHOICES, default='User', max_length=10,
-        blank=True, verbose_name=_('Role')
+        blank=True, verbose_name=_('角色')
     )
     avatar = models.ImageField(
-        upload_to="avatar", null=True, verbose_name=_('Avatar')
+        upload_to="avatar", null=True, verbose_name=_('头像')
     )
     wechat = models.CharField(
-        max_length=128, blank=True, verbose_name=_('Wechat')
+        max_length=128, blank=True, verbose_name=_('微信')
     )
     phone = models.CharField(
-        max_length=20, blank=True, null=True, verbose_name=_('Phone')
+        max_length=20, blank=True, null=True, verbose_name=_('手机')
     )
     otp_level = models.SmallIntegerField(
         default=0, choices=OTP_LEVEL_CHOICES, verbose_name=_('MFA')
     )
     comment = models.TextField(
-        max_length=200, blank=True, verbose_name=_('Comment')
+        max_length=200, blank=True, verbose_name=_('备注')
     )
     is_first_login = models.BooleanField(default=True)
     created_by = models.CharField(
@@ -73,7 +73,7 @@ class MyUser(AbstractUser):
     )
     date_expired = models.DateTimeField(
         default=date_expired_default, blank=True, null=True,
-        db_index=True, verbose_name=_('Date expired')
+        db_index=True, verbose_name=_('失效日期')
     )
     source = models.CharField(
         max_length=30, default=SOURCE_LOCAL, choices=SOURCE_CHOICES,

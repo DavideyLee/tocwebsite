@@ -17,7 +17,7 @@ class UserCreateUpdateForm(OrgModelForm):
     )
     role = forms.ChoiceField(
         choices=role_choices, required=True,
-        initial=MyUser.ROLE_USER, label=_("Role")
+        initial=MyUser.ROLE_USER, label=_("角色")
     )
     public_key = forms.CharField(
         label=_('ssh public key'), max_length=5000, required=False,
@@ -41,7 +41,7 @@ class UserCreateUpdateForm(OrgModelForm):
             'groups': forms.SelectMultiple(
                 attrs={
                     'class': 'select2',
-                    'data-placeholder': _('Join user groups')
+                    'data-placeholder': _('添加到用户组')
                 }
             )
         }

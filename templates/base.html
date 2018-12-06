@@ -17,7 +17,8 @@
     <div id="page-wrapper" class="gray-bg">
         {# 右侧头部导航栏！#}
         {% include '_head_right_bar.html' %}
-        {# 右侧主体内容！#}
+        {% block help_message %} {% endblock %}
+        {% include '_message.html' %}
         {% block content %}{% endblock %}
         {# 右侧页脚内容！#}
         {% include '_footer.html' %}
